@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_shopping_app_getx/custom_widgets/sp_icon.dart';
+import 'package:flutter_shopping_app_getx/widgets/sp_icon.dart';
 import 'package:flutter_shopping_app_getx/modules/categories/view/categories_screen.dart';
 import 'package:flutter_shopping_app_getx/modules/home/view/home_screen.dart';
 import 'package:flutter_shopping_app_getx/modules/profile/view/profile_screen.dart';

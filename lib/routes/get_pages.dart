@@ -1,4 +1,6 @@
 import 'package:flutter_shopping_app_getx/modules/categories/binding/categories_binding.dart';
+import 'package:flutter_shopping_app_getx/modules/testView/test_binding.dart';
+import 'package:flutter_shopping_app_getx/modules/testView/test_view.dart';
 import 'package:flutter_shopping_app_getx/routes/route_constant.dart';
 import 'package:get/get.dart';
 
@@ -13,5 +15,10 @@ List<GetPage> getPages = [
     page: () => CategoriesScreen(),
     binding: CategoriesBinding(),
   ),
-  GetPage(name: RouteConstant.profileScreen, page: () => ProfileScreen())
+  GetPage(name: RouteConstant.profileScreen, page: () => ProfileScreen()),
+  GetPage(
+    name: RouteConstant.testScreen,
+    page: () => TestScreen(),
+    binding: TestBinding(),
+  ),
 ];
