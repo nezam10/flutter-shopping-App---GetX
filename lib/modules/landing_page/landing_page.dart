@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_shopping_app_getx/common/values/app_colors.dart';
 import 'package:flutter_shopping_app_getx/widgets/sp_icon.dart';
 import 'package:flutter_shopping_app_getx/modules/categories/view/categories_screen.dart';
 import 'package:flutter_shopping_app_getx/modules/home/view/home_screen.dart';
@@ -19,7 +20,7 @@ class _LandingPageState extends State<LandingPage> {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: currentIndex,
-          selectedItemColor: Colors.red,
+          selectedItemColor: AppColors.red,
           selectedLabelStyle: const TextStyle(fontSize: 15),
           onTap: (value) {
             setState(() {
@@ -30,22 +31,21 @@ class _LandingPageState extends State<LandingPage> {
             BottomNavigationBarItem(
                 icon: SpIcon(
                   assetName: "home.png",
-                  index: 0,
-                  currentIndex: currentIndex,
+                  // index: 0,
+                  // currentIndex: currentIndex,
+                  isSelected: 0 == currentIndex,
                 ),
                 label: "Home"),
             BottomNavigationBarItem(
                 icon: SpIcon(
                   assetName: "category.png",
-                  index: 1,
-                  currentIndex: currentIndex,
+                  isSelected: 1 == currentIndex,
                 ),
                 label: "Catagorie"),
             BottomNavigationBarItem(
                 icon: SpIcon(
                   assetName: "user.png",
-                  index: 2,
-                  currentIndex: currentIndex,
+                  isSelected: 2 == currentIndex,
                 ),
                 label: "Account"),
           ]),

@@ -11,6 +11,13 @@ abstract class AppTextStyle {
     fontSize: FontSizeRS.fontSize96,
     letterSpacing: -1.5,
   );
+  static final TextStyle headline6 = const TextStyle(
+    color: AppColors.black,
+  ).copyWith(
+    fontWeight: FontWeight.w300,
+    fontSize: FontSizeRS.fontSize14,
+    letterSpacing: 0.15,
+  );
 
   // subtitle text styles
   static final TextStyle subtitle1 = const TextStyle(
@@ -39,18 +46,26 @@ abstract class AppTextStyle {
 
   // body text style
   static final TextStyle body1 = const TextStyle(
-    color: AppColors.black,
+    color: AppColors.bodyColor1,
   ).copyWith(
       fontWeight: FontWeight.w400,
       fontSize: FontSizeRS.fontSize16,
       letterSpacing: 0.5);
 
   static final TextStyle body2 = const TextStyle(
-    color: AppColors.black,
+    color: AppColors.bodyColor1,
   ).copyWith(
       fontWeight: FontWeight.w400,
       fontSize: FontSizeRS.fontSize14,
       letterSpacing: 0.25);
+
+  //Caption Text Style
+  static final TextStyle caption = const TextStyle(
+    color: AppColors.captionColor,
+  ).copyWith(
+      fontWeight: FontWeight.w300,
+      fontSize: FontSizeRS.fontSize12,
+      letterSpacing: 0.4);
 
   // text theme
   static TextTheme get textTheme => TextTheme(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_shopping_app_getx/common/values/app_text_style.dart';
 import 'package:flutter_shopping_app_getx/common/values/strings.dart';
 import 'package:flutter_shopping_app_getx/modules/landing_page/landing_page.dart';
 import 'package:flutter_shopping_app_getx/routes/get_pages.dart';
@@ -20,7 +21,12 @@ class MyApp extends StatelessWidget {
       builder: (context, child) => GetMaterialApp(
         title: Strings.appName,
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          textTheme: TextTheme(
+            headline6: AppTextStyle.headline6,
+            bodyText1: AppTextStyle.body1,
+            bodyText2: AppTextStyle.body2,
+            caption: AppTextStyle.caption,
+          ),
         ),
         //initialRoute: RouteConstant.homeScreen,
         getPages: getPages,
