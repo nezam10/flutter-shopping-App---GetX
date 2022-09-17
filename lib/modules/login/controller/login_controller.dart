@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_shopping_app_getx/data/models/login_model.dart';
 import 'package:flutter_shopping_app_getx/data/provider/network_handler.dart';
@@ -14,54 +15,58 @@ class LoginController extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  GetLoginModel? getLoginModel;
-  static final client = http.Client();
-  static final storage = FlutterSecureStorage();
+  GetLoginModel getLoginModelFinal = GetLoginModel();
+  final client = http.Client();
+  final storage = FlutterSecureStorage();
 
   @override
   void onInit() {
     super.onInit();
   }
 
-  //
+  // post api ==== login
 
-  static void post(var body, String endpoint) async {
+  post(var body, String endpoint) async {
     var response = await client.post(buildUrl(endpoint), body: body);
     print("Response body: ${response.body}");
     if (response.statusCode == 200) {
-      Get.snackbar("success", "success");
       var result = json.decode(response.body);
       var getLoginModel = GetLoginModel.fromJson(result);
+      Future.delayed(Duration(seconds: 1));
+
+      Get.snackbar("Success", "${getLoginModel.message}",
+          backgroundColor: Colors.blue[200]);
+      getLoginModelFinal = getLoginModel;
       print("result================ : $result");
-      print("getLoginModel================ : $result");
-      print("get data :==================${getLoginModel.message}");
+      print("get data :==================${getLoginModel}");
     } else {
-      Get.snackbar("Error", "Error");
+      Get.snackbar(
+          "Error", "${getLoginModelFinal.message ?? "Enter Email & Password"}",
+          backgroundColor: Colors.blue[200]);
     }
   }
 
-  static Uri buildUrl(String endpoind) {
+  Uri buildUrl(String endpoind) {
     String baseUrl = "https://restaurant.bdtask.com/demo/V1/";
     final apiPath = baseUrl + endpoind;
     return Uri.parse(apiPath);
   }
 
-  static void storeToken(String token) async {
+  void storeToken(String token) async {
     await storage.write(key: "token", value: token);
   }
 
-  static Future<String?> getToken(String token) async {
+  Future<String?> getToken(String token) async {
     return await storage.read(key: "token");
   }
 
   //
 
-  void login() {
+  login() {
     LoginModel loginModel = LoginModel(
         email: emailController.text.toString(),
         password: passwordController.text.toString());
-    LoginController.post(
-        {"email": emailController.text, "password": passwordController.text},
+    post({"email": emailController.text, "password": passwordController.text},
         "sign_in");
   }
 }

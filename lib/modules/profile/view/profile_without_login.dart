@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_shopping_app_getx/common/values/app_colors.dart';
+import 'package:flutter_shopping_app_getx/modules/login/controller/login_controller.dart';
 import 'package:flutter_shopping_app_getx/modules/login/view/login_bottomsheet.dart';
 import 'package:flutter_shopping_app_getx/modules/profile/view/footer_content.dart';
 import 'package:flutter_shopping_app_getx/modules/profile/view/profile_item.dart';
@@ -7,7 +8,8 @@ import 'package:flutter_shopping_app_getx/widgets/sp_solid_button.dart';
 import 'package:get/get.dart';
 
 class ProfileWithoutLogin extends StatelessWidget {
-  const ProfileWithoutLogin({super.key});
+  ProfileWithoutLogin({super.key});
+  final LoginController loginController = Get.put(LoginController());
 
   final double topContainerheight = 190;
   @override
@@ -115,7 +117,7 @@ class ProfileWithoutLogin extends StatelessWidget {
           height: 40,
         ),
         Text(
-          "APP VERSION 0.0.1",
+          "${loginController.getLoginModelFinal.message ?? "App Version 0.0.1"}",
           style: Theme.of(context).textTheme.overline,
         ),
         const SizedBox(
