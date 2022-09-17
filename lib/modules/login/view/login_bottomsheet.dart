@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_shopping_app_getx/common/values/app_colors.dart';
+import 'package:flutter_shopping_app_getx/modules/login/controller/login_controller.dart';
 import 'package:flutter_shopping_app_getx/widgets/sp_solid_button.dart';
 import 'package:get/get.dart';
 
 class LoginBottomsheet extends StatelessWidget {
-  const LoginBottomsheet({super.key});
+  LoginBottomsheet({super.key});
+
+  LoginController loginController = Get.put(LoginController());
 
   @override
   Widget build(BuildContext context) {
@@ -66,9 +69,48 @@ class LoginBottomsheet extends StatelessWidget {
             const SizedBox(height: 20),
             Container(
               height: 43,
-              child: const TextField(
+              child: TextField(
+                controller: loginController.emailController,
                 keyboardType: TextInputType.name,
-                style: TextStyle(
+                style: const TextStyle(
+                  color: AppColors.captionColor,
+                  fontSize: 13,
+                ),
+                decoration: InputDecoration(
+                  labelText: "Mobile Number",
+                  labelStyle: TextStyle(color: Colors.black54, fontSize: 13),
+                  prefixIcon: Padding(
+                    padding: EdgeInsets.only(left: 10, top: 15),
+                    child: Text(
+                      "+91 |",
+                      style: TextStyle(
+                        color: Colors.black54,
+                        fontSize: 13,
+                      ),
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      width: 1,
+                      color: AppColors.captionColor,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      width: 1.5,
+                      color: Colors.black54,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            Container(
+              height: 43,
+              child: TextField(
+                controller: loginController.passwordController,
+                keyboardType: TextInputType.name,
+                style: const TextStyle(
                   color: AppColors.captionColor,
                   fontSize: 13,
                 ),
@@ -136,7 +178,11 @@ class LoginBottomsheet extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            SPSolidButton(text: "Continue", minusWidth: 0),
+            SPSolidButton(
+              text: "Continue",
+              minusWidth: 0,
+              onPressed: loginController.login,
+            ),
             const SizedBox(height: 20),
             RichText(
               text: TextSpan(
