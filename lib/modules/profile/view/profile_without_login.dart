@@ -7,6 +7,8 @@ import 'package:flutter_shopping_app_getx/modules/profile/view/profile_item.dart
 import 'package:flutter_shopping_app_getx/widgets/sp_solid_button.dart';
 import 'package:get/get.dart';
 
+import '../../../main.dart';
+
 class ProfileWithoutLogin extends StatelessWidget {
   ProfileWithoutLogin({super.key});
   final LoginController loginController = Get.put(LoginController());
@@ -14,6 +16,8 @@ class ProfileWithoutLogin extends StatelessWidget {
   final double topContainerheight = 190;
   @override
   Widget build(BuildContext context) {
+    print("profile without login >>>>>>> : ${prefs.getString("message")}");
+    print("profile without login msg >>>>>>> : ${loginController.msg.value}");
     return Column(
       children: [
         Container(
@@ -57,6 +61,7 @@ class ProfileWithoutLogin extends StatelessWidget {
                     onPressed: () {
                       Get.bottomSheet(LoginBottomsheet());
                     },
+                    widget: null,
                   ))
             ],
           ),
@@ -116,9 +121,13 @@ class ProfileWithoutLogin extends StatelessWidget {
         const SizedBox(
           height: 40,
         ),
-        Text(
-          "${loginController.getLoginModelFinal.message ?? "App Version 0.0.1"}",
-          style: Theme.of(context).textTheme.overline,
+        Obx(
+          () => loginController.isDataLoading.value
+              ? const Center(child: CircularProgressIndicator())
+              : Text(
+                  loginController.msg.value ?? "App Version 0.0.1",
+                  style: Theme.of(context).textTheme.overline,
+                ),
         ),
         const SizedBox(
           height: 60,

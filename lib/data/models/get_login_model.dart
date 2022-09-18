@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class GetLoginModel {
   String? status;
   int? statusCode;

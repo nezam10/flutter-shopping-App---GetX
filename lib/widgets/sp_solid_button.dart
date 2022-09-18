@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_shopping_app_getx/modules/login/controller/login_controller.dart';
+import 'package:get/get.dart';
 
 import '../common/values/app_colors.dart';
 
 class SPSolidButton extends StatelessWidget {
-  const SPSolidButton(
-      {super.key,
-      required this.text,
-      this.onPressed,
-      required this.minusWidth});
+  SPSolidButton({
+    super.key,
+    required this.text,
+    this.onPressed,
+    required this.minusWidth,
+    required this.widget,
+  });
   final String text;
   final void Function()? onPressed;
   final num minusWidth;
+  final Widget? widget;
+
+  final LoginController loginController = Get.put(LoginController());
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +37,17 @@ class SPSolidButton extends StatelessWidget {
         height: 40,
         width: MediaQuery.of(context).size.width - minusWidth,
         child: Center(
-          child: Text(
-            text,
-            style: TextStyle(color: AppColors.white),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                text,
+                style: TextStyle(color: AppColors.white),
+              ),
+              Container(
+                child: widget,
+              ),
+            ],
           ),
         ),
       ),

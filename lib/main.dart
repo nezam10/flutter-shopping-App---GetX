@@ -4,10 +4,15 @@ import 'package:flutter_shopping_app_getx/common/values/app_text_style.dart';
 import 'package:flutter_shopping_app_getx/common/values/strings.dart';
 import 'package:flutter_shopping_app_getx/modules/landing_page/landing_page.dart';
 import 'package:flutter_shopping_app_getx/routes/get_pages.dart';
-import 'package:flutter_shopping_app_getx/routes/route_constant.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+late SharedPreferences prefs;
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  prefs = await SharedPreferences.getInstance();
+
+  //await SharedPreferences.getInstance();
   runApp(const MyApp());
 }
 

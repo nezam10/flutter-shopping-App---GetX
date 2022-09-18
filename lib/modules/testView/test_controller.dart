@@ -44,7 +44,7 @@ class TestController extends GetxController {
               (element["name"]
                   .toString()
                   .toLowerCase()
-                  .contains(playerName.toLowerCase())) ||
+                  .contains(playerName.toLowerCase())) || 
               (element["country"]
                   .toString()
                   .toLowerCase()

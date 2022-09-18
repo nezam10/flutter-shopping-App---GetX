@@ -181,7 +181,20 @@ class LoginBottomsheet extends StatelessWidget {
             SPSolidButton(
               text: "Continue",
               minusWidth: 0,
-              onPressed: loginController.login,
+              onPressed: () {
+                loginController.login();
+              },
+              widget: Obx(
+                () => loginController.isDataLoading.value
+                    ? Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: CircularProgressIndicator(
+                          color: AppColors.white,
+                          strokeWidth: 2,
+                        ),
+                      )
+                    : Container(),
+              ),
             ),
             const SizedBox(height: 20),
             RichText(
