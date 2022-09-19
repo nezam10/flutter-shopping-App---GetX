@@ -34,7 +34,12 @@ class LoginController extends GetxController {
     //msg.value = prefs.getString("testLoaginData").toString();
     var msg2 = prefs.getString("testLoaginData").toString().obs;
     listdata;
-    getSaveData();
+    //getSaveData();
+    if (listdata.isNotEmpty) {
+      print("haha");
+    } else {
+      getSaveData() ?? null;
+    }
     print("msg value : ==================>>>>>>>> ${msg.value}");
   }
 
@@ -79,7 +84,7 @@ class LoginController extends GetxController {
   // save data show onInit method
   getSaveData() {
     var msg2 = prefs.getString("testLoaginData").toString().obs;
-    Map<String, dynamic> map = jsonDecode(msg2.value);
+    Map<String, dynamic> map = jsonDecode(msg2.value.toString());
     final user = GetLoginModel.fromJson(map);
     print("user Data================ : ${user.message}");
     listdata.add(user);
