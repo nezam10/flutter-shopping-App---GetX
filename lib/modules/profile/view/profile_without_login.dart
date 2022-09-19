@@ -16,8 +16,12 @@ class ProfileWithoutLogin extends StatelessWidget {
   final double topContainerheight = 190;
   @override
   Widget build(BuildContext context) {
-    print("profile without login >>>>>>> : ${prefs.getString("message")}");
+    print(
+        "profile without login >>>>>>> : ${prefs.getString("testLoaginData")}");
     print("profile without login msg >>>>>>> : ${loginController.msg.value}");
+    print("profile without login msg2 >>>>>>> : ${loginController.msg2.value}");
+    print(
+        "profile without login listdata >>>>>>> : ${loginController.listdata.length}");
     return Column(
       children: [
         Container(
@@ -125,7 +129,7 @@ class ProfileWithoutLogin extends StatelessWidget {
           () => loginController.isDataLoading.value
               ? const Center(child: CircularProgressIndicator())
               : Text(
-                  loginController.msg.value ?? "App Version 0.0.1",
+                  loginController.message.value ?? "App Version 0.0.1",
                   style: Theme.of(context).textTheme.overline,
                 ),
         ),

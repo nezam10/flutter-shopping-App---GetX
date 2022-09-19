@@ -22,13 +22,19 @@ class LoginController extends GetxController {
   var isDataLoading = true.obs;
 
   //
-  var msg = "sdfj".obs;
+  var msg = "".obs;
+  var message = ''.obs;
+  var listdata = <GetLoginModel>[].obs;
+  var msg2 = prefs.getString("testLoaginData").toString().obs;
 
   @override
   void onInit() {
     isDataLoading(false);
     super.onInit();
-    msg.value = prefs.getString("message").toString();
+    //msg.value = prefs.getString("testLoaginData").toString();
+    var msg2 = prefs.getString("testLoaginData").toString().obs;
+    listdata;
+    getSaveData();
     print("msg value : ==================>>>>>>>> ${msg.value}");
   }
 
@@ -39,32 +45,57 @@ class LoginController extends GetxController {
     var response = await client.post(buildUrl(endpoint), body: body);
 
     print("Response body: ${response.body}");
+
     if (response.statusCode == 200) {
+      //final
       var result = json.decode(response.body);
       var getLoginModel = GetLoginModel.fromJson(result);
+      print("save data==============>>>>> ${getLoginModel.data!.email}");
       Future.delayed(Duration(seconds: 1));
       Get.back();
       Get.snackbar("Success", "${getLoginModel.message}",
           backgroundColor: Colors.blue[200]);
       getLoginModelFinal = getLoginModel.obs;
-      await prefs.setString("message", getLoginModel.message.toString());
+      //await prefs.setString("testLoaginData", getLoginModel.message.toString());
 
+      // test save data
+      if (response.statusCode == 200) {
+        var json = jsonEncode(result);
+        print("json object=============>>>>>>>> : $json");
+        prefs.setString("testLoaginData", json);
+      }
       isDataLoading(false);
-
-      msg = prefs.getString("message").toString().obs;
-      emailController.clear();
-      passwordController.clear();
-
-      print("result================ : $result");
-      print("get data :==================${getLoginModel}");
     } else {
       Get.snackbar("Error",
           "${getLoginModelFinal.value.message ?? "Enter Email & Password"}",
           backgroundColor: Colors.blue[200]);
-      await prefs.setString("message", "email & password not valid");
-      msg = prefs.getString("message").toString().obs;
+      await prefs.setString("testLoaginData", "email & password not valid");
+      msg = prefs.getString("testLoaginData").toString().obs;
     }
     isDataLoading(false);
+  }
+
+  // getSaveData method call onInit method
+  // save data show onInit method
+  getSaveData() {
+    var msg2 = prefs.getString("testLoaginData").toString().obs;
+    Map<String, dynamic> map = jsonDecode(msg2.value);
+    final user = GetLoginModel.fromJson(map);
+    print("user Data================ : ${user.message}");
+    listdata.add(user);
+
+    print("listdata================ : ${listdata}");
+    emailController.clear();
+    passwordController.clear();
+
+    print("msg================ : $msg2");
+    //print("result================ : $result");
+    //
+    for (var element in listdata) {
+      var msg = element.message;
+      message.value = msg.toString();
+      print("message================>>>> : $message");
+    }
   }
 
   // baseUrl
