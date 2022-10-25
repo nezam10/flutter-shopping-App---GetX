@@ -129,7 +129,7 @@ class ProfileWithoutLogin extends StatelessWidget {
           () => loginController.isDataLoading.value
               ? const Center(child: CircularProgressIndicator())
               : Text(
-                  loginController.message.value ?? "App Version 0.0.1",
+                  loginController.message.value,
                   style: Theme.of(context).textTheme.overline,
                 ),
         ),

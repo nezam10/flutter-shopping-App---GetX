@@ -22,11 +22,14 @@ class ShowListViewBuilder extends StatelessWidget {
                 itemCount: loginController.listdata.length,
                 itemBuilder: (context, index) {
                   return Obx(
-                    () => ListTile(
-                      title: Text(loginController.listdata[index].data!.email
-                          .toString()),
-                      subtitle: Text("subtitle"),
-                    ),
+                    () => loginController.isDataLoading.value == true
+                        ? CircularProgressIndicator()
+                        : ListTile(
+                            title: Text(loginController
+                                .listdata[index].data!.email
+                                .toString()),
+                            subtitle: Text("subtitle"),
+                          ),
                   );
                 },
               ),

@@ -26,7 +26,7 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Get.to(ShowListViewBuilder());
+                Get.to(() => ShowListViewBuilder());
               },
               child: Text("ListView"),
             ),

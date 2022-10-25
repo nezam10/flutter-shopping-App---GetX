@@ -32,14 +32,15 @@ class LoginController extends GetxController {
     isDataLoading(false);
     super.onInit();
     //msg.value = prefs.getString("testLoaginData").toString();
-    var msg2 = prefs.getString("testLoaginData").toString().obs;
+    msg2 = prefs.getString("testLoaginData").toString().obs;
     listdata;
     //getSaveData();
-    if (listdata.isNotEmpty) {
+    if (msg2.isNotEmpty) {
       print("haha");
     } else {
-      getSaveData() ?? null;
+      getSaveData();
     }
+
     print("msg value : ==================>>>>>>>> ${msg.value}");
   }
 
@@ -74,7 +75,7 @@ class LoginController extends GetxController {
       Get.snackbar("Error",
           "${getLoginModelFinal.value.message ?? "Enter Email & Password"}",
           backgroundColor: Colors.blue[200]);
-      await prefs.setString("testLoaginData", "email & password not valid");
+      //await prefs.setString("testLoaginData", "email & password not valid");
       msg = prefs.getString("testLoaginData").toString().obs;
     }
     isDataLoading(false);
@@ -83,24 +84,31 @@ class LoginController extends GetxController {
   // getSaveData method call onInit method
   // save data show onInit method
   getSaveData() {
+    isDataLoading(true);
     var msg2 = prefs.getString("testLoaginData").toString().obs;
-    Map<String, dynamic> map = jsonDecode(msg2.value.toString());
-    final user = GetLoginModel.fromJson(map);
-    print("user Data================ : ${user.message}");
-    listdata.add(user);
+    if (msg2.isNotEmpty) {
+      Map<String, dynamic> map = jsonDecode(msg2.value);
+      final user = GetLoginModel.fromJson(map);
+      print("user Data================ : ${user.message}");
+      listdata.add(user);
 
-    print("listdata================ : ${listdata}");
-    emailController.clear();
-    passwordController.clear();
+      print("listdata================ : ${listdata}");
+      emailController.clear();
+      passwordController.clear();
 
-    print("msg================ : $msg2");
-    //print("result================ : $result");
-    //
-    for (var element in listdata) {
-      var msg = element.message;
-      message.value = msg.toString();
-      print("message================>>>> : $message");
+      print("msg================ : $msg2");
+      //print("result================ : $result");
+      //
+      for (var element in listdata) {
+        var msg = element.message;
+        message.value = msg.toString();
+        print("message================>>>> : $message");
+      }
+      isDataLoading(false);
+    } else {
+      isDataLoading(false);
     }
+    isDataLoading(false);
   }
 
   // baseUrl
@@ -128,5 +136,6 @@ class LoginController extends GetxController {
         "sign_in");
     //msg = prefs.getString("message").toString().obs;
     print("msg value : ==================>>>>>>>> ${msg.value}");
+    getSaveData();
   }
 }
